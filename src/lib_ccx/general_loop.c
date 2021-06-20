@@ -875,11 +875,12 @@ int general_loop(struct lib_ccx_ctx *ctx)
 #endif
 		case CCX_SM_MXF:
 			get_more_data = ccx_mxf_getmoredata;
-            // The MXFContext might have already been initialized if the
-            // stream type was autodetected
-            if (ctx->demux_ctx->private_data == NULL) {
-                ctx->demux_ctx->private_data = ccx_gxf_init(ctx->demux_ctx);
-            }
+			// The MXFContext might have already been initialized if the
+			// stream type was autodetected
+			if (ctx->demux_ctx->private_data == NULL)
+			{
+				ctx->demux_ctx->private_data = ccx_gxf_init(ctx->demux_ctx);
+			}
 			break;
 		default:
 			fatal(CCX_COMMON_EXIT_BUG_BUG, "In general_loop: Impossible value for stream_mode");
@@ -1020,7 +1021,7 @@ int general_loop(struct lib_ccx_ctx *ctx)
 				isdb_set_global_time(dec_ctx, tstamp);
 			}
 			if (data_node->bufferdatatype == CCX_TELETEXT && dec_ctx->private_data) //if we have teletext subs, we set the min_pts here
-				set_tlt_delta(dec_ctx, min_pts);
+				set_tlt_delta(dec_ctx, dec_ctx->timing->current_pts);
 			ret = process_data(enc_ctx, dec_ctx, data_node);
 			if (enc_ctx != NULL)
 			{

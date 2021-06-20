@@ -756,15 +756,15 @@ static void dinit_output_ctx(struct encoder_ctx *ctx)
 {
 	int i;
 	for (i = 0; i < ctx->nb_out; i++)
-    {
+	{
 		dinit_write(ctx->out + i);
-    }
+	}
 	freep(&ctx->out);
 
 	if (ctx->dtvcc_extract)
 	{
 		for (i = 0; i < CCX_DTVCC_MAX_SERVICES; i++)
-			ccx_dtvcc_writer_cleanup(&ctx->dtvcc_writers[i]);
+			dtvcc_writer_cleanup(&ctx->dtvcc_writers[i]);
 	}
 }
 
@@ -789,7 +789,7 @@ static int init_output_ctx(struct encoder_ctx *ctx, struct encoder_cfg *cfg)
 	ctx->out = malloc(sizeof(struct ccx_s_write) * nb_lang);
 	if (!ctx->out)
 		return -1;
-    memset (ctx->out, 0, sizeof(struct ccx_s_write) * nb_lang);
+	memset(ctx->out, 0, sizeof(struct ccx_s_write) * nb_lang);
 	ctx->nb_out = nb_lang;
 	ctx->keep_output_closed = cfg->keep_output_closed;
 	ctx->force_flush = cfg->force_flush;
@@ -888,8 +888,8 @@ static int init_output_ctx(struct encoder_ctx *ctx, struct encoder_cfg *cfg)
 				else
 					basefilename = get_basename(ctx->first_input_file);
 
-				ccx_dtvcc_writer_init(&ctx->dtvcc_writers[i], basefilename,
-						      ctx->program_number, i + 1, cfg->write_format, cfg);
+				dtvcc_writer_init(&ctx->dtvcc_writers[i], basefilename,
+						  ctx->program_number, i + 1, cfg->write_format, cfg);
 				free(basefilename);
 			}
 		}
