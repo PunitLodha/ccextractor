@@ -17,9 +17,8 @@ made to reuse, not duplicate, as many functions as possible */
 
 #ifdef ENABLE_RUST
 // Include rust decoder
-extern void process(struct lib_cc_decode *ctx,
-		    const unsigned char *data,
-		    int data_length);
+extern void dtvcc_process_cc_data(struct dtvcc_ctx *dtvcc,
+				  const unsigned char *data);
 #endif
 
 uint64_t utc_refvalue = UINT64_MAX; /* _UI64_MAX/UINT64_MAX means don't use UNIX, 0 = use current system time as reference, +1 use a specific reference */
@@ -204,7 +203,7 @@ int do_cb(struct lib_cc_decode *ctx, unsigned char *cc_block, struct cc_subtitle
 					if (ctx->write_format != CCX_OF_RCWT)
 					{
 #ifdef ENABLE_RUST
-						process(ctx, (const unsigned char *)temp, 4);
+						dtvcc_process_cc_data(ctx->dtvcc, (const unsigned char *)temp);
 #else
 						dtvcc_process_data(ctx->dtvcc, (const unsigned char *)temp);
 #endif
