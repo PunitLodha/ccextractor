@@ -25,6 +25,8 @@ jobs:
         run: cargo fmt --all -- --check
       - name: clippy
         run: cargo clippy -- -D warnings
+      - name: find
+        run: find /home -type d -name target
   build_rust:
     runs-on: ubuntu-latest
     steps:
