@@ -14,8 +14,8 @@ jobs:
           path: |
             src/rust/.cargo/registry
             src/rust/.cargo/git
-            src/rust/target
-          key: cargo-${{ hashFiles('**/Cargo.lock') }}
+            **/target
+          key: cargo1-${{ hashFiles('**/Cargo.lock') }}
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
@@ -35,8 +35,8 @@ jobs:
           path: |
             src/rust/.cargo/registry
             src/rust/.cargo/git
-            src/rust/target
-          key: cargo-${{ hashFiles('**/Cargo.lock') }}
+            **/target
+          key: cargo1-${{ hashFiles('**/Cargo.lock') }}
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
