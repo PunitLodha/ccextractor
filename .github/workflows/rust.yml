@@ -1,39 +1,24 @@
 name: Rustfmt
 on: [push, workflow_dispatch]
 jobs:
-  rustfmt:
+  format_rust:
     runs-on: ubuntu-latest
     defaults:
-        run:
-          working-directory: ./src/rust
+      run:
+        working-directory: ./src/rust
     steps:
       - uses: actions/checkout@v2
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
           override: true
-          components: rustfmt
-      - name: cargo fmt
+          components: rustfmt, clippy
+      - name: rustfmt
         run: cargo fmt --all -- --check
-  clippy:
-    runs-on: ubuntu-latest
-    defaults:
-        run:
-          working-directory: ./src/rust
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions-rs/toolchain@v1
-        with:
-          toolchain: stable
-          override: true
-          components: clippy
-      - name: cargo clippy
+      - name: clippy
         run: cargo clippy -- -D warnings
-  check:
+  build_rust:
     runs-on: ubuntu-latest
-    defaults:
-        run:
-          working-directory: ./src/rust
     steps:
       - uses: actions/checkout@v2
       - uses: actions-rs/toolchain@v1
@@ -42,3 +27,4 @@ jobs:
           override: true
       - name: cargo check
         run: cargo check 
+        working-directory: ./src/rust
