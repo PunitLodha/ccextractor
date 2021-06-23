@@ -3,6 +3,9 @@ on: [push, workflow_dispatch]
 jobs:
   rustfmt:
     runs-on: ubuntu-latest
+    defaults:
+        run:
+          working-directory: ./src/rust
     steps:
       - uses: actions/checkout@v2
       - uses: actions-rs/toolchain@v1
@@ -11,8 +14,4 @@ jobs:
           override: true
           components: rustfmt
       - name: fmt
-        working-directory: ./src/rust
-        uses: actions-rs/cargo@v1
-        with:
-          command: fmt
-          args: --all -- --check
+        run: cargo fmt --all -- --check
