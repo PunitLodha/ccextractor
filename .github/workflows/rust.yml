@@ -3,9 +3,6 @@ on: [push, workflow_dispatch]
 jobs:
   rustfmt:
     runs-on: ubuntu-latest
-    defaults:
-        run:
-          working-directory: ./src/rust
     steps:
       - uses: actions/checkout@v2
       - uses: actions-rs/toolchain@v1
@@ -17,3 +14,4 @@ jobs:
         with:
           command: fmt
           args: --all -- --check
+          working-directory: ./src/rust
