@@ -7,6 +7,7 @@ on:
     - '**.c'
     - '**.h'
     - 'windows/**'
+    - 'src/rust/**'
   pull_request:
     types: [opened, synchronize, reopened]
     paths:
@@ -14,7 +15,7 @@ on:
     - '**.c'
     - '**.h'
     - 'windows/**'
-
+    - 'src/rust/**'
 jobs:
   build_non_ocr_release:
     runs-on: windows-latest
@@ -106,3 +107,22 @@ jobs:
         name: CCExtractor Windows OCR and HardSubX Debug build
         path: |
           ./windows/Debug/ccextractorgui.exe
+  build_rust:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2.3.4
+      - name: cache 
+        uses: actions/cache@v2
+        with:
+          path: |
+            src/rust/.cargo/registry
+            src/rust/.cargo/git
+            src/rust/target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+      - name: build
+        run: cargo build 
+        working-directory: ./src/rust
