@@ -112,9 +112,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2.3.4
       - name: Install llvm and clang
-        uses: KyleMayes/install-llvm-action@v1
-        with:
-          version: "10"
+        run: choco install llvm
       - name: cache 
         uses: actions/cache@v2
         with:
@@ -130,16 +128,14 @@ jobs:
       - name: set env
         run: set LIBCLANG_PATH="C:\\Program Files\\LLVM\\bin"
       - name: build
-        run: cargo build 
+        run: set PATH=%PATH%;"C:\\Program Files\\LLVM\\bin" && cargo build 
         working-directory: ./src/rust
   build_rust2:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2.3.4
       - name: Install llvm and clang
-        uses: KyleMayes/install-llvm-action@v1
-        with:
-          version: "10"
+        run: choco install llvm
       - name: cache 
         uses: actions/cache@v2
         with:
@@ -155,16 +151,14 @@ jobs:
       - name: set env
         run: set LIBCLANG_PATH="C:\\Program Files\\LLVM\\lib"
       - name: build
-        run: cargo build 
+        run: set PATH=%PATH%;"C:\\Program Files\\LLVM\\lib" && cargo build 
         working-directory: ./src/rust
   build_rust3:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2.3.4
       - name: Install llvm and clang
-        uses: KyleMayes/install-llvm-action@v1
-        with:
-          version: "10"
+        run: choco install llvm
       - name: cache 
         uses: actions/cache@v2
         with:
@@ -180,16 +174,14 @@ jobs:
       - name: set env
         run: set LIBCLANG_PATH="C:\Program Files\LLVM\bin"
       - name: build
-        run: cargo build 
+        run: set PATH=%PATH%;C:\Program Files\LLVM\bin && cargo build 
         working-directory: ./src/rust
   build_rust4:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2.3.4
       - name: Install llvm and clang
-        uses: KyleMayes/install-llvm-action@v1
-        with:
-          version: "10"
+        run: choco install llvm
       - name: cache 
         uses: actions/cache@v2
         with:
@@ -205,5 +197,5 @@ jobs:
       - name: set env
         run: set LIBCLANG_PATH="C:\Program Files\LLVM\lib"
       - name: build
-        run: cargo build 
+        run: set PATH=%PATH%;C:\Program Files\LLVM\lib && cargo build 
         working-directory: ./src/rust
