@@ -174,7 +174,7 @@ jobs:
       - name: set env
         run: set LIBCLANG_PATH="C:\Program Files\LLVM\bin"
       - name: build
-        run: set PATH=%PATH%;C:\Program Files\LLVM\bin && cargo build 
+        run: set PATH=%PATH%;"C:\Program Files\LLVM\bin" && cargo build 
         working-directory: ./src/rust
   build_rust4:
     runs-on: windows-latest
@@ -197,5 +197,5 @@ jobs:
       - name: set env
         run: set LIBCLANG_PATH="C:\Program Files\LLVM\lib"
       - name: build
-        run: set PATH=%PATH%;C:\Program Files\LLVM\lib && cargo build 
+        run: set PATH=%PATH%;"C:\Program Files\LLVM\lib" && cargo build 
         working-directory: ./src/rust
