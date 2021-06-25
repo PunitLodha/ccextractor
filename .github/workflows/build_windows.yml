@@ -126,7 +126,8 @@ jobs:
           toolchain: stable
           override: true
       - name: set env
-        run: set LIBCLANG_PATH="C:\\Program Files\\LLVM\\bin"
+        run: set LIBCLANG_PATH="C:\\Program Files\\LLVM\\bin" && cargo build
+        working-directory: ./src/rust
       - name: build
         run: set PATH=%PATH%;"C:\\Program Files\\LLVM\\bin" && cargo build 
         working-directory: ./src/rust
@@ -149,7 +150,8 @@ jobs:
           toolchain: stable
           override: true
       - name: set env
-        run: set LIBCLANG_PATH="C:\\Program Files\\LLVM\\lib"
+        run: set LIBCLANG_PATH="C:\\Program Files\\LLVM\\lib" && cargo build
+        working-directory: ./src/rust
       - name: build
         run: set PATH=%PATH%;"C:\\Program Files\\LLVM\\lib" && cargo build 
         working-directory: ./src/rust
@@ -172,7 +174,8 @@ jobs:
           toolchain: stable
           override: true
       - name: set env
-        run: set LIBCLANG_PATH="C:\Program Files\LLVM\bin"
+        run: set LIBCLANG_PATH="C:\Program Files\LLVM\bin" && cargo build
+        working-directory: ./src/rust
       - name: build
         run: set PATH=%PATH%;"C:\Program Files\LLVM\bin" && cargo build 
         working-directory: ./src/rust
@@ -195,7 +198,8 @@ jobs:
           toolchain: stable
           override: true
       - name: set env
-        run: set LIBCLANG_PATH="C:\Program Files\LLVM\lib"
+        run: set LIBCLANG_PATH="C:\Program Files\LLVM\lib" && cargo build
+        working-directory: ./src/rust
       - name: build
         run: set PATH=%PATH%;"C:\Program Files\LLVM\lib" && cargo build 
         working-directory: ./src/rust
