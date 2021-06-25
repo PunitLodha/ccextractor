@@ -197,9 +197,6 @@ jobs:
         with:
           toolchain: stable
           override: true
-      - name: set env
-        run: set LIBCLANG_PATH="C:\Program Files\LLVM\lib" && cargo build
-        working-directory: ./src/rust
       - name: build
         env:
           LIBCLANG_PATH: "C:\\Program Files\\LLVM\\lib"
