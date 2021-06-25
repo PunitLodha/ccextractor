@@ -125,8 +125,10 @@ jobs:
         with:
           toolchain: stable
           override: true
+      - name: set env
+        run: set LIBCLANG_PATH="C:\\Program Files\\LLVM\\bin"
       - name: build
-        run: set LIBCLANG_PATH="C:\\Program Files\\LLVM\\bin" cargo build 
+        run: cargo build 
         working-directory: ./src/rust
   build_rust2:
     runs-on: windows-latest
@@ -146,8 +148,10 @@ jobs:
         with:
           toolchain: stable
           override: true
+      - name: set env
+        run: set LIBCLANG_PATH="C:\\Program Files\\LLVM\\lib"
       - name: build
-        run: set LIBCLANG_PATH="C:\\Program Files\\LLVM\\lib" cargo build 
+        run: cargo build 
         working-directory: ./src/rust
   build_rust3:
     runs-on: windows-latest
@@ -167,8 +171,10 @@ jobs:
         with:
           toolchain: stable
           override: true
+      - name: set env
+        run: set LIBCLANG_PATH="C:\Program Files\LLVM\bin"
       - name: build
-        run: set LIBCLANG_PATH="C:\Program Files\LLVM\bin" cargo build 
+        run: cargo build 
         working-directory: ./src/rust
   build_rust4:
     runs-on: windows-latest
@@ -188,6 +194,8 @@ jobs:
         with:
           toolchain: stable
           override: true
+      - name: set env
+        run: set LIBCLANG_PATH="C:\Program Files\LLVM\lib"
       - name: build
-        run: set LIBCLANG_PATH="C:\Program Files\LLVM\lib" cargo build 
+        run: cargo build 
         working-directory: ./src/rust
