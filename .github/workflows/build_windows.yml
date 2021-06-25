@@ -201,5 +201,8 @@ jobs:
         run: set LIBCLANG_PATH="C:\Program Files\LLVM\lib" && cargo build
         working-directory: ./src/rust
       - name: build
-        run: set PATH=%PATH%;"C:\Program Files\LLVM\lib" && cargo build 
+        env:
+          LIBCLANG_PATH: "C:\\Program Files\\LLVM\\lib"
+          LLVM_CONFIG_PATH: "C:\\Program Files\\LLVM\\bin\\llvm-config"
+        run: cargo build 
         working-directory: ./src/rust
