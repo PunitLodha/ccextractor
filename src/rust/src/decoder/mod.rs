@@ -2,11 +2,13 @@
 //!
 //! This module provides a CEA 708 decoder as defined by ANSI/CTA-708-E R-2018
 
+use log::{debug, warn};
+
 use crate::bindings::*;
 
 const CCX_DTVCC_MAX_PACKET_LENGTH: u8 = 128;
 
-/// Process cc data to generate dtvcc packet
+/// Process data passed from C
 ///
 /// data has following format:
 ///
@@ -39,10 +41,10 @@ impl dtvcc_ctx {
             // type 0 and 1 are for CEA 608 data and are handled before calling this function
             // valid types for CEA 708 data are only 2 and 3
             2 => {
-                println!("dtvcc_process_data: DTVCC Channel Packet Data");
+                debug!("dtvcc_process_data: DTVCC Channel Packet Data");
                 if cc_valid == 1 && self.is_current_packet_header_parsed == 1 {
                     if self.current_packet_length > 253 {
-                        println!("dtvcc_process_data: Warning: Legal packet size exceeded (1), data not added.");
+                        warn!("dtvcc_process_data: Warning: Legal packet size exceeded (1), data not added.");
                     } else {
                         self.current_packet[self.current_packet_length as usize] = data1;
                         self.current_packet_length += 1;
@@ -65,10 +67,10 @@ impl dtvcc_ctx {
                 }
             }
             3 => {
-                println!("dtvcc_process_data: DTVCC Channel Packet Start");
+                debug!("dtvcc_process_data: DTVCC Channel Packet Start");
                 if cc_valid == 1 {
                     if self.current_packet_length > (CCX_DTVCC_MAX_PACKET_LENGTH - 1) as i32 {
-                        println!("dtvcc_process_data: Warning: Legal packet size exceeded (2), data not added.");
+                        warn!("dtvcc_process_data: Warning: Legal packet size exceeded (2), data not added.");
                     } else {
                         self.current_packet[self.current_packet_length as usize] = data1;
                         self.current_packet_length += 1;
@@ -78,7 +80,7 @@ impl dtvcc_ctx {
                     }
                 }
             }
-            _ => println!(
+            _ => warn!(
                 "dtvcc_process_data: shouldn't be here - cc_type: {}",
                 cc_type
             ),
@@ -87,7 +89,7 @@ impl dtvcc_ctx {
     pub fn process_current_packet(&mut self, len: i32) {
         unsafe {
             let ctx = self as *mut dtvcc_ctx;
-            crate::bindings::dtvcc_process_current_packet(ctx, len);
+            dtvcc_process_current_packet(ctx, len);
         }
     }
 }
