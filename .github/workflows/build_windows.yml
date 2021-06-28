@@ -129,6 +129,6 @@ jobs:
         env:
           LIBCLANG_PATH: "C:\\Program Files\\LLVM\\lib"
           LLVM_CONFIG_PATH: "C:\\Program Files\\LLVM\\bin\\llvm-config"
-          BINDGEN_EXTRA_CLANG_ARGS: -fms-compatibility-version=0
+          BINDGEN_EXTRA_CLANG_ARGS: -fmsc-version=0
         run: cargo build 
         working-directory: ./src/rust
