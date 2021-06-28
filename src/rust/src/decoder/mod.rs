@@ -87,7 +87,7 @@ impl dtvcc_ctx {
     pub fn process_current_packet(&mut self, len: i32) {
         unsafe {
             let ctx = self as *mut dtvcc_ctx;
-            dtvcc_process_current_packet(ctx, len);
+            crate::bindings::dtvcc_process_current_packet(ctx, len);
         }
     }
 }
