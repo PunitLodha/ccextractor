@@ -55,7 +55,7 @@
 
 	#include "disable_warnings.h"
 
-	#ifdef _MSC_VER
+	#if defined(_MSC_VER) && !defined(__clang__)
 		#include "stdintmsc.h"
 		// Don't bug me with strcpy() deprecation warnings
 		#pragma warning(disable : 4996)
