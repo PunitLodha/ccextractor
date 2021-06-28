@@ -120,6 +120,7 @@ jobs:
             src/rust/.cargo/registry
             src/rust/.cargo/git
             src/rust/target
+            C:/Program Files/LLVM
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
       - uses: actions-rs/toolchain@v1
         with:
@@ -130,5 +131,5 @@ jobs:
           LIBCLANG_PATH: "C:\\Program Files\\LLVM\\lib"
           LLVM_CONFIG_PATH: "C:\\Program Files\\LLVM\\bin\\llvm-config"
           BINDGEN_EXTRA_CLANG_ARGS: -fmsc-version=0
-        run: cargo build 
+        run: echo "Just for caching"
         working-directory: ./src/rust
