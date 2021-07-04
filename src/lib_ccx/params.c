@@ -1698,10 +1698,18 @@ int parse_parameters(struct ccx_s_options *opt, int argc, char *argv[])
 			set_output_format(opt, argv[i]);
 			continue;
 		}
-		if (strncmp(argv[i], "-out=", 5) == 0)
+		if (strncmp(argv[i], "--out", 5) == 0)
 		{
-			set_output_format(opt, argv[i] + 5);
-			continue;
+			if (i < argc - 1)
+			{
+				i++;
+				set_output_format(opt, argv[i]);
+				continue;
+			}
+			else
+			{
+				fatal(EXIT_MALFORMED_PARAMETER, "--out has no argument.\n");
+			}
 		}
 
 		/* Credit stuff */
