@@ -33,7 +33,7 @@ jobs:
       run: ./build
       working-directory: ./linux
     - name: Display version information
-      run: ./linux/ccextractor --version
+      run: ls && ./linux/ccextractor --version
     - name: Prepare artifacts
       run: mkdir ./linux/artifacts
     - name: Copy release artifact
