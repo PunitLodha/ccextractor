@@ -44,3 +44,39 @@ jobs:
       - name: build
         run: cargo build 
         working-directory: ./src/rust
+  build_shell:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Install tesseract
+      run: sudo apt-get install libtesseract-dev
+    - uses: actions/checkout@v2.3.4
+    - name: build
+      run: ./build
+      working-directory: ./linux
+    - name: Display version information
+      run: ls && ./ccextractor --version
+      working-directory: ./linux
+    - name: Prepare artifacts
+      run: mkdir ./linux/artifacts
+    - name: Copy release artifact
+      run: cp ./linux/ccextractor ./linux/artifacts/
+    - uses: actions/upload-artifact@v2
+      with:
+        name: CCExtractor Linux build
+        path: ./linux/artifacts
+  build_autoconf:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2.3.4
+    - name: run autogen
+      run: ./autogen.sh
+      working-directory: ./linux
+    - name: configure
+      run: ./configure --enable-debug
+      working-directory: ./linux
+    - name: make
+      run: make
+      working-directory: ./linux
+    - name: Display version information
+      run: ls && ./ccextractor --version
+      working-directory: ./linux
