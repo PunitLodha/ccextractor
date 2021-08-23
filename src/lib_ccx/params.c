@@ -35,8 +35,8 @@
 #define DEFAULT_FONT_PATH_ITALICS "/usr/share/fonts/truetype/noto/NotoSans-Italic.ttf"
 #endif
 
-#ifdef ENABLE_RUST
-extern void init_logger();
+#ifndef DISABLE_RUST
+extern void ccxr_init_logger();
 #endif
 
 static int inputfile_capacity = 0;
@@ -2183,8 +2183,8 @@ int parse_parameters(struct ccx_s_options *opt, int argc, char *argv[])
 		if (strcmp(argv[i], "-708") == 0)
 		{
 			opt->debug_mask |= CCX_DMT_708;
-#ifdef ENABLE_RUST
-			init_logger();
+#ifndef DISABLE_RUST
+			ccxr_init_logger();
 #endif
 			continue;
 		}

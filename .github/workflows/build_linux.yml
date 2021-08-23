@@ -10,6 +10,8 @@ on:
     - 'linux/**'
     - 'package_creators/**'
     - 'src/rust/**'
+    tags-ignore: # ignore push via new tag
+    - '*.*'
   pull_request:
     types: [opened, synchronize, reopened]
     paths:
@@ -48,7 +50,7 @@ jobs:
       run: ./autogen.sh
       working-directory: ./linux
     - name: configure
-      run: ./configure
+      run: ./configure --enable-debug
       working-directory: ./linux
     - name: make
       run: make
