@@ -121,7 +121,7 @@ jobs:
     - name: ls
       if: always()
       run: dir
-      working-directory: ./build
+      working-directory: ./build/rust/
     - name: Display version information
       run: ./ccextractorwin.exe --version
       working-directory: ./build/Debug

@@ -7,7 +7,7 @@ else ()
 endif ()
 
 if(WIN32)
-    set(CCX_RUST_SO "${CMAKE_CURRENT_BINARY_DIR}\\${TARGET_DIR}\\libccx_rust.lib")
+    set(CCX_RUST_SO "${CMAKE_CURRENT_BINARY_DIR}/${TARGET_DIR}/libccx_rust.lib")
     message("${CCX_RUST_SO}")
     add_custom_target(ccx_rust ALL
         COMMENT "Compiling ccx_rust module"
