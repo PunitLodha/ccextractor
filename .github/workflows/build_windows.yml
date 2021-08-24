@@ -116,7 +116,7 @@ jobs:
         with:
           toolchain: stable
           override: true
-      - name: build_rust
+      - name: build_rus
         env:
           LIBCLANG_PATH: "C:\\Program Files\\LLVM\\lib"
           LLVM_CONFIG_PATH: "C:\\Program Files\\LLVM\\bin\\llvm-config"
