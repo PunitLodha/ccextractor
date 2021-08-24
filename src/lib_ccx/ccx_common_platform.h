@@ -53,6 +53,8 @@
 		#include <sys/types.h>
 	#endif // _WIN32
 
+	//#include "disable_warnings.h"
+
 	#if defined(_MSC_VER) && !defined(__clang__)
 		#include "stdintmsc.h"
 		// Don't bug me with strcpy() deprecation warnings
