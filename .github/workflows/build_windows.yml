@@ -123,3 +123,5 @@ jobs:
           BINDGEN_EXTRA_CLANG_ARGS: -fmsc-version=0
         run: cargo build 
         working-directory: ./src/rust
+      - name: echo
+        run: echo "hello"
