@@ -118,6 +118,10 @@ jobs:
     - name: build Debug
       run: msbuild ccextractor.sln /p:Configuration=Debug
       working-directory: ./build
+    - name: ls
+      if: always()
+      run: dir
+      working-directory: ./build
     - name: Display version information
       run: ./ccextractorwin.exe --version
       working-directory: ./build/Debug
