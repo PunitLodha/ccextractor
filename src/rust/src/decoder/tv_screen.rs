@@ -3,10 +3,10 @@
 //! TV screen contains the captions to be displayed.
 //! Captions are added to TV screen from a window when any of DSW, HDW, TGW, DLW or CR commands are received  
 
-#[cfg(windows)]
-use std::os::windows::io::IntoRawHandle;
 #[cfg(unix)]
 use std::os::unix::prelude::IntoRawFd;
+#[cfg(windows)]
+use std::os::windows::io::IntoRawHandle;
 use std::{ffi::CStr, fs::File};
 
 use super::output::{color_to_hex, write_char, Writer};
