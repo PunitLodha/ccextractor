@@ -80,32 +80,32 @@ jobs:
   #   - name: Display version information
   #     run: ls && ./ccextractor --version
   #     working-directory: ./linux
-  build_rust_windows:
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v2.3.4
-      - name: Install llvm and clang
-        run: choco install llvm
-      - name: cache
-        uses: actions/cache@v2
-        with:
-          path: |
-            src/rust/.cargo/registry
-            src/rust/.cargo/git
-            src/rust/target
-            C:/Program Files/LLVM
-          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-      - uses: actions-rs/toolchain@v1
-        with:
-          toolchain: stable
-          override: true
-      - name: build_rus
-        env:
-          LIBCLANG_PATH: "C:\\Program Files\\LLVM\\lib"
-          LLVM_CONFIG_PATH: "C:\\Program Files\\LLVM\\bin\\llvm-config"
-          BINDGEN_EXTRA_CLANG_ARGS: -fmsc-version=0
-        run: cargo build
-        working-directory: ./src/rust
+  # build_rust_windows:
+  #   runs-on: windows-latest
+  #   steps:
+  #     - uses: actions/checkout@v2.3.4
+  #     - name: Install llvm and clang
+  #       run: choco install llvm
+  #     - name: cache
+  #       uses: actions/cache@v2
+  #       with:
+  #         path: |
+  #           src/rust/.cargo/registry
+  #           src/rust/.cargo/git
+  #           src/rust/target
+  #           C:/Program Files/LLVM
+  #         key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+  #     - uses: actions-rs/toolchain@v1
+  #       with:
+  #         toolchain: stable
+  #         override: true
+  #     - name: build_rus
+  #       env:
+  #         LIBCLANG_PATH: "C:\\Program Files\\LLVM\\lib"
+  #         LLVM_CONFIG_PATH: "C:\\Program Files\\LLVM\\bin\\llvm-config"
+  #         BINDGEN_EXTRA_CLANG_ARGS: -fmsc-version=0
+  #       run: cargo build
+  #       working-directory: ./src/rust
   build_non_ocr_debug:
     runs-on: windows-latest
     steps:
@@ -121,28 +121,28 @@ jobs:
       - name: ls
         if: always()
         run: dir
-        working-directory: ./build/rust/
-      - name: ls
+        working-directory: ./build/rust/x64/
+      - name: ls_debug
         if: always()
         run: dir
-        working-directory: ./build/Debug/
+        working-directory: ./build/
       - name: Display version information
         run: ./ccextractorwin.exe --version
         working-directory: ./build/Debug
-  build_debug:
-    runs-on: windows-latest
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v2.3.4
-      - name: Setup MSBuild.exe
-        uses: microsoft/setup-msbuild@v1.0.2
-      - name: build Debug
-        run: msbuild ccextractor.sln /p:Configuration=Debug
-        working-directory: ./windows
-      - name: ls
-        if: always()
-        run: dir
-        working-directory: ./windows/
-      - name: Display version information
-        run: ./ccextractorwin.exe --version
-        working-directory: ./windows/Debug
+  # build_debug:
+  #   runs-on: windows-latest
+  #   steps:
+  #     - name: Check out repository
+  #       uses: actions/checkout@v2.3.4
+  #     - name: Setup MSBuild.exe
+  #       uses: microsoft/setup-msbuild@v1.0.2
+  #     - name: build Debug
+  #       run: msbuild ccextractor.sln /p:Configuration=Debug
+  #       working-directory: ./windows
+  #     - name: ls
+  #       if: always()
+  #       run: dir
+  #       working-directory: ./windows/
+  #     - name: Display version information
+  #       run: ./ccextractorwin.exe --version
+  #       working-directory: ./windows/Debug
