@@ -130,7 +130,6 @@
     <ClInclude Include="..\src\thirdparty\freetype\include\freetype\config\ftmodule.h" />
     <ClInclude Include="..\src\thirdparty\freetype\include\freetype\config\ftoption.h" />
     <ClInclude Include="..\src\thirdparty\freetype\include\freetype\config\ftstdlib.h" />
-    <ClInclude Include="..\src\thirdparty\freetype\include\freetype\config\ftstdlib.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\thirdparty\gpacmp4\box_dump.c" />
