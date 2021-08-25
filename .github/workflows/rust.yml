@@ -159,7 +159,7 @@ jobs:
         run: .\rust.bat
         working-directory: ./windows
       - name: build Debug
-        run: msbuild ccextractor.sln /p:Configuration=Debug
+        run: msbuild ccextractor.sln /p:Configuration=Debug /p:Platform=x64
         working-directory: ./windows
       - name: ls
         if: always()
