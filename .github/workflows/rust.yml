@@ -1,92 +1,92 @@
 name: Rustfmt
 on: [push, workflow_dispatch]
 jobs:
-  format_rust:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./src/rust
-    steps:
-      - uses: actions/checkout@v2.3.4
-      - name: cache 
-        uses: actions/cache@v2
-        with:
-          path: |
-            src/rust/.cargo/registry
-            src/rust/.cargo/git
-            src/rust/target
-          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-      - uses: actions-rs/toolchain@v1
-        with:
-          toolchain: stable
-          override: true
-          components: rustfmt, clippy
-      - name: rustfmt
-        run: cargo fmt --all -- --check
-      - name: clippy
-        run: cargo clippy -- -D warnings
-  build_rust:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2.3.4
-      - name: cache 
-        uses: actions/cache@v2
-        with:
-          path: |
-            src/rust/.cargo/registry
-            src/rust/.cargo/git
-            src/rust/target
-          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-      - uses: actions-rs/toolchain@v1
-        with:
-          toolchain: stable
-          override: true
-      - name: build
-        run: cargo build 
-        working-directory: ./src/rust
-  build_shell:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Install tesseract
-      run: sudo apt-get install libtesseract-dev
-    - uses: actions/checkout@v2.3.4
-    - name: build
-      run: ./build
-      working-directory: ./linux
-    - name: Display version information
-      run: ls && ./ccextractor --version
-      working-directory: ./linux
-    - name: Prepare artifacts
-      run: mkdir ./linux/artifacts
-    - name: Copy release artifact
-      run: cp ./linux/ccextractor ./linux/artifacts/
-    - uses: actions/upload-artifact@v2
-      with:
-        name: CCExtractor Linux build
-        path: ./linux/artifacts
-  build_autoconf:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2.3.4
-    - name: run autogen
-      run: ./autogen.sh
-      working-directory: ./linux
-    - name: configure
-      run: ./configure --enable-debug
-      working-directory: ./linux
-    - name: make
-      run: make
-      working-directory: ./linux
-    - name: Display version information
-      run: ls && ./ccextractor --version
-      working-directory: ./linux
+  # format_rust:
+  #   runs-on: ubuntu-latest
+  #   defaults:
+  #     run:
+  #       working-directory: ./src/rust
+  #   steps:
+  #     - uses: actions/checkout@v2.3.4
+  #     - name: cache
+  #       uses: actions/cache@v2
+  #       with:
+  #         path: |
+  #           src/rust/.cargo/registry
+  #           src/rust/.cargo/git
+  #           src/rust/target
+  #         key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+  #     - uses: actions-rs/toolchain@v1
+  #       with:
+  #         toolchain: stable
+  #         override: true
+  #         components: rustfmt, clippy
+  #     - name: rustfmt
+  #       run: cargo fmt --all -- --check
+  #     - name: clippy
+  #       run: cargo clippy -- -D warnings
+  # build_rust:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2.3.4
+  #     - name: cache
+  #       uses: actions/cache@v2
+  #       with:
+  #         path: |
+  #           src/rust/.cargo/registry
+  #           src/rust/.cargo/git
+  #           src/rust/target
+  #         key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+  #     - uses: actions-rs/toolchain@v1
+  #       with:
+  #         toolchain: stable
+  #         override: true
+  #     - name: build
+  #       run: cargo build
+  #       working-directory: ./src/rust
+  # build_shell:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - name: Install tesseract
+  #     run: sudo apt-get install libtesseract-dev
+  #   - uses: actions/checkout@v2.3.4
+  #   - name: build
+  #     run: ./build
+  #     working-directory: ./linux
+  #   - name: Display version information
+  #     run: ls && ./ccextractor --version
+  #     working-directory: ./linux
+  #   - name: Prepare artifacts
+  #     run: mkdir ./linux/artifacts
+  #   - name: Copy release artifact
+  #     run: cp ./linux/ccextractor ./linux/artifacts/
+  #   - uses: actions/upload-artifact@v2
+  #     with:
+  #       name: CCExtractor Linux build
+  #       path: ./linux/artifacts
+  # build_autoconf:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - uses: actions/checkout@v2.3.4
+  #   - name: run autogen
+  #     run: ./autogen.sh
+  #     working-directory: ./linux
+  #   - name: configure
+  #     run: ./configure --enable-debug
+  #     working-directory: ./linux
+  #   - name: make
+  #     run: make
+  #     working-directory: ./linux
+  #   - name: Display version information
+  #     run: ls && ./ccextractor --version
+  #     working-directory: ./linux
   build_rust_windows:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2.3.4
       - name: Install llvm and clang
         run: choco install llvm
-      - name: cache 
+      - name: cache
         uses: actions/cache@v2
         with:
           path: |
@@ -104,24 +104,45 @@ jobs:
           LIBCLANG_PATH: "C:\\Program Files\\LLVM\\lib"
           LLVM_CONFIG_PATH: "C:\\Program Files\\LLVM\\bin\\llvm-config"
           BINDGEN_EXTRA_CLANG_ARGS: -fmsc-version=0
-        run: cargo build 
+        run: cargo build
         working-directory: ./src/rust
   build_non_ocr_debug:
     runs-on: windows-latest
     steps:
-    - name: Check out repository
-      uses: actions/checkout@v2.3.4
-    - name: Setup MSBuild.exe
-      uses: microsoft/setup-msbuild@v1.0.2
-    - name: cmake
-      run: mkdir build && cd build && cmake ../src
-    - name: build Debug
-      run: msbuild ccextractor.sln /p:Configuration=Debug
-      working-directory: ./build
-    - name: ls
-      if: always()
-      run: dir
-      working-directory: ./build/rust/
-    - name: Display version information
-      run: ./ccextractorwin.exe --version
-      working-directory: ./build/Debug
+      - name: Check out repository
+        uses: actions/checkout@v2.3.4
+      - name: Setup MSBuild.exe
+        uses: microsoft/setup-msbuild@v1.0.2
+      - name: cmake
+        run: mkdir build && cd build && cmake ../src
+      - name: build Debug
+        run: msbuild ccextractor.sln /p:Configuration=Debug
+        working-directory: ./build
+      - name: ls
+        if: always()
+        run: dir
+        working-directory: ./build/rust/
+      - name: ls
+        if: always()
+        run: dir
+        working-directory: ./build/Debug/
+      - name: Display version information
+        run: ./ccextractorwin.exe --version
+        working-directory: ./build/Debug
+  build_debug:
+    runs-on: windows-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2.3.4
+      - name: Setup MSBuild.exe
+        uses: microsoft/setup-msbuild@v1.0.2
+      - name: build Debug
+        run: msbuild ccextractor.sln /p:Configuration=Debug
+        working-directory: ./windows
+      - name: ls
+        if: always()
+        run: dir
+        working-directory: ./windows/
+      - name: Display version information
+        run: ./ccextractorwin.exe --version
+        working-directory: ./windows/Debug
