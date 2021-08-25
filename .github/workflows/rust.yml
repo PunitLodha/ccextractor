@@ -155,6 +155,7 @@ jobs:
           LIBCLANG_PATH: "C:\\Program Files\\LLVM\\lib"
           LLVM_CONFIG_PATH: "C:\\Program Files\\LLVM\\bin\\llvm-config"
           BINDGEN_EXTRA_CLANG_ARGS: -fmsc-version=0
+          CARGO_TARGET_DIR: "..\..\windows"
         run: .\rust.bat
         working-directory: ./windows
       - name: build Debug
