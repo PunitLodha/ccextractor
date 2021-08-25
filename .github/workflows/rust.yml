@@ -124,8 +124,8 @@ jobs:
         working-directory: ./build/rust/x64/
       - name: ls_debug
         if: always()
-        run: dir
-        working-directory: ./build/
+        run: type ccx_rust.vcxproj
+        working-directory: ./build/rust/
       - name: Display version information
         run: ./ccextractorwin.exe --version
         working-directory: ./build/Debug
