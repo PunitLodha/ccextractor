@@ -129,20 +129,22 @@ jobs:
       - name: Display version information
         run: ./ccextractorwin.exe --version
         working-directory: ./build/Debug
-  # build_debug:
-  #   runs-on: windows-latest
-  #   steps:
-  #     - name: Check out repository
-  #       uses: actions/checkout@v2.3.4
-  #     - name: Setup MSBuild.exe
-  #       uses: microsoft/setup-msbuild@v1.0.2
-  #     - name: build Debug
-  #       run: msbuild ccextractor.sln /p:Configuration=Debug
-  #       working-directory: ./windows
-  #     - name: ls
-  #       if: always()
-  #       run: dir
-  #       working-directory: ./windows/
-  #     - name: Display version information
-  #       run: ./ccextractorwin.exe --version
-  #       working-directory: ./windows/Debug
+  build_debug:
+    runs-on: windows-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2.3.4
+      - name: Setup MSBuild.exe
+        uses: microsoft/setup-msbuild@v1.0.2
+      - name: pre rust build
+        run: .\rust.bat
+      - name: build Debug
+        run: msbuild ccextractor.sln /p:Configuration=Debug
+        working-directory: ./windows
+      - name: ls
+        if: always()
+        run: dir
+        working-directory: ./windows/
+      - name: Display version information
+        run: ./ccextractorwin.exe --version
+        working-directory: ./windows/Debug
