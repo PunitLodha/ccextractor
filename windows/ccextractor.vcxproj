@@ -450,7 +450,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\src\thirdparty\freetype\include;..\src\thirdparty\win_spec_incld;..\src\lib_ccx;..\src\thirdparty\lib_hash;..\src\lib_ccx\zvbi;..\src\thirdparty\protobuf-c;..\src\thirdparty\gpacmp4;..\src\thirdparty\win_iconv;..\src\thirdparty\zlib;..\src\thirdparty\libpng;..\src\thirdparty;..\src;libs\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\src\thirdparty\freetype\include;..\src\thirdparty\win_spec_incld;..\src\lib_ccx;..\src\thirdparty\lib_hash;..\src\lib_ccx\zvbi;..\src\thirdparty\protobuf-c;..\src\thirdparty\gpacmp4;..\src\thirdparty\win_iconv;..\src\thirdparty\zlib;..\src\thirdparty\libpng;..\src\thirdparty;..\src;libs\include;.\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;FT2_BUILD_LIBRARY;GPAC_DISABLE_VTT;GPAC_DISABLE_OD_DUMP;_DEBUG;_CONSOLE;_FILE_OFFSET_BITS=64;_CRT_SECURE_NO_WARNINGS;GPAC_DISABLE_REMOTERY;GPAC_DISABLE_ZLIB;GPAC_HAVE_CONFIG_H;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -461,17 +461,13 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>ccx_rust.lib;
-avcodec.lib;
-avformat.lib;
-avutil.lib;
-swscale.lib;WS2_32.Lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>ccx_rust.lib;avcodec.lib;avformat.lib;avutil.lib;swscale.lib;WS2_32.Lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ShowProgress>NotSet</ShowProgress>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
-      <AdditionalLibraryDirectories>$(ProjectDir)libs\lib\ffmpeg-lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)libs\lib\ffmpeg-lib\;.\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y "$(ProjectDir)libs\lib\ffmpeg-lib\avcodec-57.dll" "$(ProjectDir)$(OutDir)"
