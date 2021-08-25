@@ -138,6 +138,7 @@ jobs:
         uses: microsoft/setup-msbuild@v1.0.2
       - name: pre rust build
         run: .\rust.bat
+        working-directory: ./windows
       - name: build Debug
         run: msbuild ccextractor.sln /p:Configuration=Debug
         working-directory: ./windows
