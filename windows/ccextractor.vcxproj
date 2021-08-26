@@ -463,7 +463,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>ccx_rust.lib;avcodec.lib;avformat.lib;avutil.lib;swscale.lib;WS2_32.Lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>ccx_rust.lib;UserEnv.lib;avcodec.lib;avformat.lib;avutil.lib;swscale.lib;WS2_32.Lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ShowProgress>NotSet</ShowProgress>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
@@ -492,7 +492,7 @@ xcopy /y "$(ProjectDir)libs\lib\ffmpeg-lib\swscale-4.dll" "$(ProjectDir)$(OutDir
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>ccx_rust.lib;WS2_32.Lib;UserEnv.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>ccx_rust.lib;UserEnv.lib;WS2_32.Lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ShowProgress>NotSet</ShowProgress>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
@@ -516,7 +516,7 @@ xcopy /y "$(ProjectDir)libs\lib\ffmpeg-lib\swscale-4.dll" "$(ProjectDir)$(OutDir
       <DisableSpecificWarnings>4005;4996</DisableSpecificWarnings>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>Ws2_32.lib;$(ProjectDir)libs\lib\debug-lib\pvt.cppan.demo.danbloomberg.leptonica-1.74.0.lib;$(ProjectDir)libs\lib\debug-lib\pvt.cppan.demo.google.tesseract.tesseract-master.lib;$(ProjectDir)libs\lib\debug-lib\pvt.cppan.demo.gif-5.1.4.lib;$(ProjectDir)libs\lib\debug-lib\pvt.cppan.demo.tiff-4.0.7.lib;$(ProjectDir)libs\lib\debug-lib\pvt.cppan.demo.jpeg-9.2.0.lib;$(ProjectDir)libs\lib\debug-lib\pvt.cppan.demo.openjpeg.openjp2-2.1.2.lib;$(ProjectDir)libs\lib\debug-lib\pvt.cppan.demo.mgk25.jbig.jbig-2.1.0.lib;$(ProjectDir)libs\lib\debug-lib\pvt.cppan.demo.mgk25.jbig.ar-2.1.0.lib;$(ProjectDir)libs\lib\debug-lib\pvt.cppan.demo.xz_utils.lzma-5.2.2.lib;$(ProjectDir)libs\lib\debug-lib\pvt.cppan.demo.webp-0.5.1.lib;$(ProjectDir)libs\lib\ffmpeg-lib\avcodec.lib;$(ProjectDir)libs\lib\ffmpeg-lib\avformat.lib;$(ProjectDir)libs\lib\ffmpeg-lib\avutil.lib;$(ProjectDir)libs\lib\ffmpeg-lib\swscale.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>ccx_rust.lib;UserEnv.lib;Ws2_32.lib;$(ProjectDir)libs\lib\debug-lib\pvt.cppan.demo.danbloomberg.leptonica-1.74.0.lib;$(ProjectDir)libs\lib\debug-lib\pvt.cppan.demo.google.tesseract.tesseract-master.lib;$(ProjectDir)libs\lib\debug-lib\pvt.cppan.demo.gif-5.1.4.lib;$(ProjectDir)libs\lib\debug-lib\pvt.cppan.demo.tiff-4.0.7.lib;$(ProjectDir)libs\lib\debug-lib\pvt.cppan.demo.jpeg-9.2.0.lib;$(ProjectDir)libs\lib\debug-lib\pvt.cppan.demo.openjpeg.openjp2-2.1.2.lib;$(ProjectDir)libs\lib\debug-lib\pvt.cppan.demo.mgk25.jbig.jbig-2.1.0.lib;$(ProjectDir)libs\lib\debug-lib\pvt.cppan.demo.mgk25.jbig.ar-2.1.0.lib;$(ProjectDir)libs\lib\debug-lib\pvt.cppan.demo.xz_utils.lzma-5.2.2.lib;$(ProjectDir)libs\lib\debug-lib\pvt.cppan.demo.webp-0.5.1.lib;$(ProjectDir)libs\lib\ffmpeg-lib\avcodec.lib;$(ProjectDir)libs\lib\ffmpeg-lib\avformat.lib;$(ProjectDir)libs\lib\ffmpeg-lib\avutil.lib;$(ProjectDir)libs\lib\ffmpeg-lib\swscale.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ShowProgress>NotSet</ShowProgress>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
@@ -539,7 +539,7 @@ xcopy /y "$(ProjectDir)libs\lib\ffmpeg-lib\swscale-4.dll" "$(ProjectDir)$(OutDir
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Full|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>../src/thirdparty/protobuf-c;../src/thirdparty/win_spec_incld;../src/thirdparty/gpacmp4;../src/thirdparty/libpng;../src/thirdparty/zlib;../src;../src/lib_ccx;../src/lib_ccx/zvbi;../src/thirdparty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\src\thirdparty\freetype\include;../src/thirdparty/protobuf-c;../src/thirdparty/win_spec_incld;../src/thirdparty/gpacmp4;../src/thirdparty/libpng;../src/thirdparty/zlib;../src;../src/lib_ccx;../src/lib_ccx/zvbi;../src/thirdparty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>ENABLE_OCR;FT2_BUILD_LIBRARY;GPAC_DISABLE_VTT;GPAC_DISABLE_OD_DUMP;WIN32;_DEBUG;_CONSOLE;_FILE_OFFSET_BITS=64;GPAC_DISABLE_REMOTERY;GPAC_DISABLE_ZLIB;GPAC_HAVE_CONFIG_H;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -549,7 +549,7 @@ xcopy /y "$(ProjectDir)libs\lib\ffmpeg-lib\swscale-4.dll" "$(ProjectDir)$(OutDir
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>WS2_32.Lib;avcodec.lib;avformat.lib;avutil.lib;swscale.lib;liblept172.lib;libtesseract304d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>ccx_rust.lib;UserEnv.lib;WS2_32.Lib;avcodec.lib;avformat.lib;avutil.lib;swscale.lib;liblept172.lib;libtesseract304d.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ShowProgress>NotSet</ShowProgress>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
@@ -574,7 +574,7 @@ xcopy /y "$(ProjectDir)libs\lib\libtesseract304d.dll" "$(ProjectDir)$(OutDir)"</
       <DisableSpecificWarnings>4005;4996</DisableSpecificWarnings>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>Ws2_32.lib;$(ProjectDir)libs\lib\release-lib\pvt.cppan.demo.danbloomberg.leptonica-1.74.0.lib;$(ProjectDir)libs\lib\release-lib\pvt.cppan.demo.google.tesseract.tesseract-master.lib;$(ProjectDir)libs\lib\release-lib\pvt.cppan.demo.gif-5.1.4.lib;$(ProjectDir)libs\lib\release-lib\pvt.cppan.demo.tiff-4.0.7.lib;$(ProjectDir)libs\lib\release-lib\pvt.cppan.demo.jpeg-9.2.0.lib;$(ProjectDir)libs\lib\release-lib\pvt.cppan.demo.openjpeg.openjp2-2.1.2.lib;$(ProjectDir)libs\lib\release-lib\pvt.cppan.demo.mgk25.jbig.jbig-2.1.0.lib;$(ProjectDir)libs\lib\release-lib\pvt.cppan.demo.mgk25.jbig.ar-2.1.0.lib;$(ProjectDir)libs\lib\release-lib\pvt.cppan.demo.xz_utils.lzma-5.2.2.lib;$(ProjectDir)libs\lib\release-lib\pvt.cppan.demo.webp-0.5.1.lib;$(ProjectDir)libs\lib\ffmpeg-lib\avcodec.lib;$(ProjectDir)libs\lib\ffmpeg-lib\avformat.lib;$(ProjectDir)libs\lib\ffmpeg-lib\avutil.lib;$(ProjectDir)libs\lib\ffmpeg-lib\swscale.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>ccx_rust.lib;UserEnv.lib;Ws2_32.lib;$(ProjectDir)libs\lib\release-lib\pvt.cppan.demo.danbloomberg.leptonica-1.74.0.lib;$(ProjectDir)libs\lib\release-lib\pvt.cppan.demo.google.tesseract.tesseract-master.lib;$(ProjectDir)libs\lib\release-lib\pvt.cppan.demo.gif-5.1.4.lib;$(ProjectDir)libs\lib\release-lib\pvt.cppan.demo.tiff-4.0.7.lib;$(ProjectDir)libs\lib\release-lib\pvt.cppan.demo.jpeg-9.2.0.lib;$(ProjectDir)libs\lib\release-lib\pvt.cppan.demo.openjpeg.openjp2-2.1.2.lib;$(ProjectDir)libs\lib\release-lib\pvt.cppan.demo.mgk25.jbig.jbig-2.1.0.lib;$(ProjectDir)libs\lib\release-lib\pvt.cppan.demo.mgk25.jbig.ar-2.1.0.lib;$(ProjectDir)libs\lib\release-lib\pvt.cppan.demo.xz_utils.lzma-5.2.2.lib;$(ProjectDir)libs\lib\release-lib\pvt.cppan.demo.webp-0.5.1.lib;$(ProjectDir)libs\lib\ffmpeg-lib\avcodec.lib;$(ProjectDir)libs\lib\ffmpeg-lib\avformat.lib;$(ProjectDir)libs\lib\ffmpeg-lib\avutil.lib;$(ProjectDir)libs\lib\ffmpeg-lib\swscale.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
@@ -599,7 +599,7 @@ xcopy /y "$(ProjectDir)libs\lib\ffmpeg-lib\swscale-4.dll" "$(ProjectDir)$(OutDir
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release-Full|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>../src/thirdparty/protobuf-c;../src/thirdparty/win_spec_incld;../src/thirdparty/gpacmp4;../src/thirdparty/libpng;../src/thirdparty/zlib;../src;../src/lib_ccx;../src/lib_ccx/zvbi;../src/thirdparty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\src\thirdparty\freetype\include;../src/thirdparty/protobuf-c;../src/thirdparty/win_spec_incld;../src/thirdparty/gpacmp4;../src/thirdparty/libpng;../src/thirdparty/zlib;../src;../src/lib_ccx;../src/lib_ccx/zvbi;../src/thirdparty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>VERSION_FILE_PRESENT;ENABLE_OCR;WIN32;NDEBUG;_CONSOLE;_FILE_OFFSET_BITS=64;GPAC_DISABLE_REMOTERY;GPAC_DISABLE_ZLIB;GPAC_HAVE_CONFIG_H;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PrecompiledHeader>
@@ -608,7 +608,7 @@ xcopy /y "$(ProjectDir)libs\lib\ffmpeg-lib\swscale-4.dll" "$(ProjectDir)$(OutDir
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>WS2_32.Lib;avcodec.lib;avformat.lib;avutil.lib;swscale.lib;liblept172.lib;libtesseract304d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>ccx_rust.lib;UserEnv.lib;WS2_32.Lib;avcodec.lib;avformat.lib;avutil.lib;swscale.lib;liblept172.lib;libtesseract304d.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
@@ -631,7 +631,7 @@ xcopy /y "$(ProjectDir)libs\lib\libtesseract304d.dll" "$(ProjectDir)$(OutDir)"</
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>avcodec.lib;avformat.lib;avutil.lib;swscale.lib;WS2_32.Lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>ccx_rust.lib;UserEnv.lib;avcodec.lib;avformat.lib;avutil.lib;swscale.lib;WS2_32.Lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
@@ -662,7 +662,7 @@ xcopy /y "$(ProjectDir)libs\lib\ffmpeg-lib\swscale-4.dll" "$(ProjectDir)$(OutDir
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>WS2_32.Lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>ccx_rust.lib;UserEnv.lib;WS2_32.Lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
