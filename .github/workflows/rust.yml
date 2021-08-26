@@ -218,6 +218,9 @@ jobs:
       - name: build Debug
         run: msbuild ccextractor.sln /p:Configuration=Debug
         working-directory: ./windows
+      - name: ls
+        run: dir
+        working-directory: ./windows
       - name: Display version information
         run: ./ccextractorwin.exe --version
         working-directory: ./windows/Debug
