@@ -150,7 +150,7 @@ jobs:
   build_non_ocr_release:
     runs-on: windows-latest
     steps:
-    - uses: actions/checkout@v2.3.4
+      - uses: actions/checkout@v2.3.4
       - name: cache
         uses: actions/cache@v2
         with:
@@ -178,16 +178,16 @@ jobs:
           BINDGEN_EXTRA_CLANG_ARGS: -fmsc-version=0
         run: .\rust.bat
         working-directory: ./windows
-    - name: build Release
-      run: msbuild ccextractor.sln /p:Configuration=Release
-      working-directory: ./windows
-    - name: Display version information
-      run: ./ccextractorwin.exe --version
-      working-directory: ./windows/Release
+      - name: build Release
+        run: msbuild ccextractor.sln /p:Configuration=Release
+        working-directory: ./windows
+      - name: Display version information
+        run: ./ccextractorwin.exe --version
+        working-directory: ./windows/Release
   build_non_ocr_debug:
     runs-on: windows-latest
     steps:
-    - uses: actions/checkout@v2.3.4
+      - uses: actions/checkout@v2.3.4
       - name: cache
         uses: actions/cache@v2
         with:
@@ -215,16 +215,16 @@ jobs:
           BINDGEN_EXTRA_CLANG_ARGS: -fmsc-version=0
         run: .\rust.bat
         working-directory: ./windows
-    - name: build Debug
-      run: msbuild ccextractor.sln /p:Configuration=Debug
-      working-directory: ./windows
-    - name: Display version information
-      run: ./ccextractorwin.exe --version
-      working-directory: ./windows/Debug
+      - name: build Debug
+        run: msbuild ccextractor.sln /p:Configuration=Debug
+        working-directory: ./windows
+      - name: Display version information
+        run: ./ccextractorwin.exe --version
+        working-directory: ./windows/Debug
   build_ocr_hardsubx_release:
     runs-on: windows-latest
     steps:
-    - uses: actions/checkout@v2.3.4
+      - uses: actions/checkout@v2.3.4
       - name: cache
         uses: actions/cache@v2
         with:
@@ -252,16 +252,16 @@ jobs:
           BINDGEN_EXTRA_CLANG_ARGS: -fmsc-version=0
         run: .\rust.bat
         working-directory: ./windows
-    - name: build Release
-      run: msbuild ccextractor.sln /p:Configuration=Release-Full
-      working-directory: ./windows
-    - name: Display version information
-      run: ./ccextractorwinfull.exe --version
-      working-directory: ./windows/Release-Full
+      - name: build Release
+        run: msbuild ccextractor.sln /p:Configuration=Release-Full
+        working-directory: ./windows
+      - name: Display version information
+        run: ./ccextractorwinfull.exe --version
+        working-directory: ./windows/Release-Full
   build_ocr_hardsubx_debug:
     runs-on: windows-latest
     steps:
-    - uses: actions/checkout@v2.3.4
+      - uses: actions/checkout@v2.3.4
       - name: cache
         uses: actions/cache@v2
         with:
@@ -289,9 +289,9 @@ jobs:
           BINDGEN_EXTRA_CLANG_ARGS: -fmsc-version=0
         run: .\rust.bat
         working-directory: ./windows
-    - name: build Debug
-      run: msbuild ccextractor.sln /p:Configuration=Debug-Full
-      working-directory: ./windows
-    - name: Display version information
-      run: ./ccextractorwinfull.exe --version
-      working-directory: ./windows/Debug-Full
+      - name: build Debug
+        run: msbuild ccextractor.sln /p:Configuration=Debug-Full
+        working-directory: ./windows
+      - name: Display version information
+        run: ./ccextractorwinfull.exe --version
+        working-directory: ./windows/Debug-Full
