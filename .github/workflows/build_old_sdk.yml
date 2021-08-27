@@ -39,14 +39,14 @@ jobs:
         working-directory: ./windows
       - name: build Debug
         run: msbuild ccextractor.sln /p:Configuration=Debug /p:Platform=x64
-        working-directory: ./windows/x64/Debug
+        working-directory: ./windows
       - name: ls
         if: always()
         run: dir
         working-directory: ./windows/x64
       - name: Display version information
         run: ./ccextractorwin.exe --version
-        working-directory: ./windows/Debug
+        working-directory: ./windows/x64/Debug
   build_non_ocr_release:
     runs-on: windows-latest
     steps:
