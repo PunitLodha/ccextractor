@@ -555,6 +555,7 @@ xcopy /y "$(ProjectDir)libs\lib\ffmpeg-lib\swscale-4.dll" "$(ProjectDir)$(OutDir
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>.\libs\lib\ffmpeg-lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y "$(ProjectDir)libs\lib\liblept172.dll" "$(ProjectDir)$(OutDir)"
@@ -615,6 +616,7 @@ xcopy /y "$(ProjectDir)libs\lib\ffmpeg-lib\swscale-4.dll" "$(ProjectDir)$(OutDir
       <SubSystem>Console</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <AdditionalLibraryDirectories>$(ProjectDir)libs\lib\ffmpeg-lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PreBuildEvent>
       <Command>pre-build.bat</Command>
