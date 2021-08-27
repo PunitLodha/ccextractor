@@ -73,7 +73,7 @@ jobs:
         run: .\rust.bat
         working-directory: ./windows
       - name: build Release
-        run: msbuild ccextractor.sln /p:Configuration=Release
+        run: msbuild ccextractor.sln /p:Configuration=Release /p:Platform=x64
         working-directory: ./windows
       - name: Display version information
         run: ./ccextractorwin.exe --version
@@ -109,7 +109,7 @@ jobs:
         run: .\rust.bat
         working-directory: ./windows
       - name: build Debug
-        run: msbuild ccextractor.sln /p:Configuration=Debug
+        run: msbuild ccextractor.sln /p:Configuration=Debug /p:Platform=x64
         working-directory: ./windows
       - name: ls
         run: dir
@@ -148,7 +148,7 @@ jobs:
         run: .\rust.bat
         working-directory: ./windows
       - name: build Release
-        run: msbuild ccextractor.sln /p:Configuration=Release-Full
+        run: msbuild ccextractor.sln /p:Configuration=Release-Full /p:Platform=x64
         working-directory: ./windows
       - name: Display version information
         run: ./ccextractorwinfull.exe --version
@@ -184,7 +184,7 @@ jobs:
         run: .\rust.bat
         working-directory: ./windows
       - name: build Debug
-        run: msbuild ccextractor.sln /p:Configuration=Debug-Full
+        run: msbuild ccextractor.sln /p:Configuration=Debug-Full /p:Platform=x64
         working-directory: ./windows
       - name: Display version information
         run: ./ccextractorwinfull.exe --version
