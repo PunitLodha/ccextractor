@@ -39,7 +39,7 @@ jobs:
         working-directory: ./windows
       - name: build Debug
         run: msbuild ccextractor.sln /p:Configuration=Debug /p:Platform=x64
-        working-directory: ./windows
+        working-directory: ./windows/x64/Debug
       - name: ls
         if: always()
         run: dir
@@ -87,7 +87,7 @@ jobs:
         working-directory: ./windows
       - name: Display version information
         run: ./ccextractorwin.exe --version
-        working-directory: ./windows/Release
+        working-directory: ./windows/x64/Release
   build_non_ocr_debug:
     runs-on: windows-latest
     steps:
@@ -131,7 +131,7 @@ jobs:
         working-directory: ./windows/x64
       - name: Display version information
         run: ./ccextractorwin.exe --version
-        working-directory: ./windows/Debug
+        working-directory: ./windows/x64/Debug
   build_ocr_hardsubx_release:
     runs-on: windows-latest
     steps:
@@ -172,7 +172,7 @@ jobs:
         working-directory: ./windows
       - name: Display version information
         run: ./ccextractorwinfull.exe --version
-        working-directory: ./windows/Release-Full
+        working-directory: ./windows/x64/Release-Full
   build_ocr_hardsubx_debug:
     runs-on: windows-latest
     steps:
@@ -213,4 +213,4 @@ jobs:
         working-directory: ./windows
       - name: Display version information
         run: ./ccextractorwinfull.exe --version
-        working-directory: ./windows/Debug-Full
+        working-directory: ./windows/x64/Debug-Full
