@@ -1,6 +1,5 @@
+
 cd ..\src\rust
 set CARGO_TARGET_DIR = "..\..\windows" && cargo build --target=i686-pc-windows-msvc
 cd ..\..\windows
-cd i686-pc-windows-msvc
-dir
-copy ccx_rust.lib ..\ccx_rust.lib
+copy i686-pc-windows-msvc\debug\ccx_rust.lib .\ccx_rust.lib
