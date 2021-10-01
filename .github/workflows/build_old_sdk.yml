@@ -171,8 +171,8 @@ jobs:
       - uses: ilammy/msvc-dev-cmd@v1
       - name: pre rust build
         env:
-          LIBCLANG_PATH: "C:\\Program Files (x86)\\LLVM\\lib"
-          LLVM_CONFIG_PATH: "C:\\Program Files (x86)\\LLVM\\bin\\llvm-config"
+          LIBCLANG_PATH: "C:\\Program Files\\LLVM\\lib"
+          LLVM_CONFIG_PATH: "C:\\Program Files\\LLVM\\bin\\llvm-config"
           CARGO_TARGET_DIR: "..\\..\\windows"
           BINDGEN_EXTRA_CLANG_ARGS: -fmsc-version=0
         run: .\rust32.bat
@@ -219,8 +219,8 @@ jobs:
       - uses: ilammy/msvc-dev-cmd@v1
       - name: pre rust build
         env:
-          LIBCLANG_PATH: "C:\\Program Files (x86)\\LLVM\\lib"
-          LLVM_CONFIG_PATH: "C:\\Program Files (x86)\\LLVM\\bin\\llvm-config"
+          LIBCLANG_PATH: "C:\\Program Files\\LLVM\\lib"
+          LLVM_CONFIG_PATH: "C:\\Program Files\\LLVM\\bin\\llvm-config"
           CARGO_TARGET_DIR: "..\\..\\windows"
           BINDGEN_EXTRA_CLANG_ARGS: -fmsc-version=0
         run: .\rust32.bat
