@@ -183,6 +183,9 @@ jobs:
       - name: Display version information
         run: ./ccextractorwinfull.exe --version
         working-directory: ./windows/Win32/Release-Full
+      - name: ls
+        if: always()
+        working-directory: ./windows
   build_ocr_hardsubx_debug:
     runs-on: windows-latest
     steps:
@@ -231,3 +234,6 @@ jobs:
       - name: Display version information
         run: ./ccextractorwinfull.exe --version
         working-directory: ./windows/Win32/Debug-Full
+      - name: ls
+        if: always()
+        working-directory: ./windows
