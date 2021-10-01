@@ -182,7 +182,7 @@ jobs:
         working-directory: ./windows
       - name: Display version information
         run: ./ccextractorwinfull.exe --version
-        working-directory: ./windows/Win32/Release-Full
+        working-directory: ./windows/Release-Full
       - name: ls
         if: always()
         run: dir
@@ -234,7 +234,7 @@ jobs:
         working-directory: ./windows
       - name: Display version information
         run: ./ccextractorwinfull.exe --version
-        working-directory: ./windows/Win32/Debug-Full
+        working-directory: ./windows/Debug-Full
       - name: ls
         if: always()
         run: dir
