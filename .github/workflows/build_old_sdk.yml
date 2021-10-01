@@ -155,6 +155,7 @@ jobs:
         with:
           toolchain: stable
           override: true
+          target: i686-pc-windows-msvc
       - name: Setup MSBuild.exe
         uses: microsoft/setup-msbuild@v1.0.2
       # - name: Install Windows 8.1 SDK
@@ -172,11 +173,11 @@ jobs:
         run: .\rust.bat
         working-directory: ./windows
       - name: build Release
-        run: msbuild ccextractor.sln /p:Configuration=Release-Full /p:Platform=x64
+        run: msbuild ccextractor.sln /p:Configuration=Release-Full /p:Platform=Win32
         working-directory: ./windows
       - name: Display version information
         run: ./ccextractorwinfull.exe --version
-        working-directory: ./windows/x64/Release-Full
+        working-directory: ./windows/Win32/Release-Full
   build_ocr_hardsubx_debug:
     runs-on: windows-latest
     steps:
@@ -197,6 +198,7 @@ jobs:
         with:
           toolchain: stable
           override: true
+          target: i686-pc-windows-msvc
       - name: Setup MSBuild.exe
         uses: microsoft/setup-msbuild@v1.0.2
       # - name: Install Windows 8.1 SDK
@@ -214,8 +216,8 @@ jobs:
         run: .\rust.bat
         working-directory: ./windows
       - name: build Debug
-        run: msbuild ccextractor.sln /p:Configuration=Debug-Full /p:Platform=x64
+        run: msbuild ccextractor.sln /p:Configuration=Debug-Full /p:Platform=Win32
         working-directory: ./windows
       - name: Display version information
         run: ./ccextractorwinfull.exe --version
-        working-directory: ./windows/x64/Debug-Full
+        working-directory: ./windows/Win32/Debug-Full
