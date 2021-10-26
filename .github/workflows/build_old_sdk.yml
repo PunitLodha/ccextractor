@@ -2,156 +2,69 @@ name: win
 on: [push, workflow_dispatch]
 
 jobs:
-  build_debug:
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v2.3.4
-      - name: cache
-        uses: actions/cache@v2
-        with:
-          path: |
-            src/rust/.cargo/registry
-            src/rust/.cargo/git
-            src/rust/target
-            windows/debug
-            C:/Program Files/LLVM
-          key: ${{ runner.os }}-cargoNew-${{ hashFiles('**/Cargo.lock') }}
-      - name: Install llvm and clang
-        run: choco install llvm
-      - uses: actions-rs/toolchain@v1
-        with:
-          toolchain: stable
-          override: true
-      - name: Setup MSBuild.exe
-        uses: microsoft/setup-msbuild@v1.0.2
-      # - name: Install Windows 8.1 SDK
-      #   shell: powershell
-      #   run: |
-      #     Invoke-WebRequest -Method Get -Uri https://go.microsoft.com/fwlink/p/?LinkId=323507 -OutFile sdksetup.exe -UseBasicParsing
-      #     Start-Process -Wait sdksetup.exe -ArgumentList "/q", "/norestart", "/features", "OptionId.WindowsDesktopSoftwareDevelopmentKit", "OptionId.NetFxSoftwareDevelopmentKit"
-      - uses: ilammy/msvc-dev-cmd@v1
-      - name: pre rust build
-        env:
-          LIBCLANG_PATH: "C:\\Program Files\\LLVM\\lib"
-          LLVM_CONFIG_PATH: "C:\\Program Files\\LLVM\\bin\\llvm-config"
-          CARGO_TARGET_DIR: "..\\..\\windows"
-          BINDGEN_EXTRA_CLANG_ARGS: -fmsc-version=0
-        run: .\rust.bat
-        working-directory: ./windows
-      - name: build Debug
-        run: msbuild ccextractor.sln /p:Configuration=Debug /p:Platform=x64
-        working-directory: ./windows
-      - name: ls
-        if: always()
-        run: dir
-        working-directory: ./windows/x64
-      - name: Display version information
-        run: ./ccextractorwin.exe --version
-        working-directory: ./windows/x64/Debug
   build_non_ocr_release:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v2.3.4
-      - name: cache
-        uses: actions/cache@v2
-        with:
-          path: |
-            src/rust/.cargo/registry
-            src/rust/.cargo/git
-            src/rust/target
-            windows/debug
-            C:/Program Files/LLVM
-          key: ${{ runner.os }}-cargoNew-${{ hashFiles('**/Cargo.lock') }}
+      - name: Check out repository
+        uses: actions/checkout@v2.3.4
+      - name: Setup MSBuild.exe
+        uses: microsoft/setup-msbuild@v1.0.2
       - name: Install llvm and clang
         run: choco install llvm
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
           override: true
-      - name: Setup MSBuild.exe
-        uses: microsoft/setup-msbuild@v1.0.2
-      # - name: Install Windows 8.1 SDK
-      #   shell: powershell
-      #   run: |
-      #     Invoke-WebRequest -Method Get -Uri https://go.microsoft.com/fwlink/p/?LinkId=323507 -OutFile sdksetup.exe -UseBasicParsing
-      #     Start-Process -Wait sdksetup.exe -ArgumentList "/q", "/norestart", "/features", "OptionId.WindowsDesktopSoftwareDevelopmentKit", "OptionId.NetFxSoftwareDevelopmentKit"
-      - uses: ilammy/msvc-dev-cmd@v1
-      - name: pre rust build
-        env:
-          LIBCLANG_PATH: "C:\\Program Files\\LLVM\\lib"
-          LLVM_CONFIG_PATH: "C:\\Program Files\\LLVM\\bin\\llvm-config"
-          CARGO_TARGET_DIR: "..\\..\\windows"
-          BINDGEN_EXTRA_CLANG_ARGS: -fmsc-version=0
-        run: .\rust.bat
-        working-directory: ./windows
+      - name: Install Win 10 SDK
+        uses: ilammy/msvc-dev-cmd@v1
       - name: build Release
         run: msbuild ccextractor.sln /p:Configuration=Release /p:Platform=x64
         working-directory: ./windows
       - name: Display version information
         run: ./ccextractorwin.exe --version
         working-directory: ./windows/x64/Release
+      - uses: actions/upload-artifact@v2
+        with:
+          name: CCExtractor Windows Non-OCR Release build
+          path: |
+            ./windows/x64/Release/ccextractorwin.exe
+            ./windows/x64/Release/*.dll
   build_non_ocr_debug:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v2.3.4
-      - name: cache
-        uses: actions/cache@v2
-        with:
-          path: |
-            src/rust/.cargo/registry
-            src/rust/.cargo/git
-            src/rust/target
-            windows/debug
-            C:/Program Files/LLVM
-          key: ${{ runner.os }}-cargoNew-${{ hashFiles('**/Cargo.lock') }}
+      - name: Check out repository
+        uses: actions/checkout@v2.3.4
+      - name: Setup MSBuild.exe
+        uses: microsoft/setup-msbuild@v1.0.2
       - name: Install llvm and clang
         run: choco install llvm
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
           override: true
-      - name: Setup MSBuild.exe
-        uses: microsoft/setup-msbuild@v1.0.2
-      # - name: Install Windows 8.1 SDK
-      #   shell: powershell
-      #   run: |
-      #     Invoke-WebRequest -Method Get -Uri https://go.microsoft.com/fwlink/p/?LinkId=323507 -OutFile sdksetup.exe -UseBasicParsing
-      #     Start-Process -Wait sdksetup.exe -ArgumentList "/q", "/norestart", "/features", "OptionId.WindowsDesktopSoftwareDevelopmentKit", "OptionId.NetFxSoftwareDevelopmentKit"
-      - uses: ilammy/msvc-dev-cmd@v1
-      - name: pre rust build
-        env:
-          LIBCLANG_PATH: "C:\\Program Files\\LLVM\\lib"
-          LLVM_CONFIG_PATH: "C:\\Program Files\\LLVM\\bin\\llvm-config"
-          CARGO_TARGET_DIR: "..\\..\\windows"
-          BINDGEN_EXTRA_CLANG_ARGS: -fmsc-version=0
-        run: .\rust.bat
-        working-directory: ./windows
+      - name: Install Win 10 SDK
+        uses: ilammy/msvc-dev-cmd@v1
       - name: build Debug
         run: msbuild ccextractor.sln /p:Configuration=Debug /p:Platform=x64
         working-directory: ./windows
-      - name: ls
-        run: dir
-        working-directory: ./windows/x64
       - name: Display version information
         run: ./ccextractorwin.exe --version
         working-directory: ./windows/x64/Debug
+      - uses: actions/upload-artifact@v2
+        with:
+          name: CCExtractor Windows Non-OCR Debug build
+          path: |
+            ./windows/x64/Debug/ccextractorwin.exe
+            ./windows/x64/Debug/ccextractorwin.pdb
+            ./windows/x64/Debug/*.dll
   build_ocr_hardsubx_release:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v2.3.4
-      - name: cache
-        uses: actions/cache@v2
-        with:
-          path: |
-            src/rust/.cargo/registry
-            src/rust/.cargo/git
-            src/rust/target
-            windows/debug
-            C:/Program Files/LLVM
-          key: ${{ runner.os }}-cargoNew-${{ hashFiles('**/Cargo.lock') }}
-      # - name: Install llvm and clang
-      #   run: choco install llvm
-      - name: Set up Clang
+      - name: Check out repository
+        uses: actions/checkout@v2.3.4
+      - name: Setup MSBuild.exe
+        uses: microsoft/setup-msbuild@v1.0.2
+      - name: Install llvm and clang
         uses: egor-tensin/setup-clang@v1
         with:
           version: latest
@@ -161,49 +74,28 @@ jobs:
           toolchain: stable
           override: true
           target: i686-pc-windows-msvc
-      - name: Setup MSBuild.exe
-        uses: microsoft/setup-msbuild@v1.0.2
-      # - name: Install Windows 8.1 SDK
-      #   shell: powershell
-      #   run: |
-      #     Invoke-WebRequest -Method Get -Uri https://go.microsoft.com/fwlink/p/?LinkId=323507 -OutFile sdksetup.exe -UseBasicParsing
-      #     Start-Process -Wait sdksetup.exe -ArgumentList "/q", "/norestart", "/features", "OptionId.WindowsDesktopSoftwareDevelopmentKit", "OptionId.NetFxSoftwareDevelopmentKit"
-      - uses: ilammy/msvc-dev-cmd@v1
-      - name: pre rust build
-        env:
-          LIBCLANG_PATH: "C:\\Program Files\\LLVM\\lib"
-          LLVM_CONFIG_PATH: "C:\\Program Files\\LLVM\\bin\\llvm-config"
-          CARGO_TARGET_DIR: "..\\..\\windows"
-          BINDGEN_EXTRA_CLANG_ARGS: -fmsc-version=0
-        run: .\rust32.bat
-        working-directory: ./windows
+      - name: Install Win 10 SDK
+        uses: ilammy/msvc-dev-cmd@v1
       - name: build Release
         run: msbuild ccextractor.sln /p:Configuration=Release-Full /p:Platform=Win32
         working-directory: ./windows
       - name: Display version information
         run: ./ccextractorwinfull.exe --version
         working-directory: ./windows/Release-Full
-      - name: ls
-        if: always()
-        run: dir
-        working-directory: ./windows
+      - uses: actions/upload-artifact@v2
+        with:
+          name: CCExtractor Windows OCR and HardSubX Release build
+          path: |
+            ./windows/Release-Full/ccextractorwinfull.exe
+            ./windows/Release-Full/*.dll
   build_ocr_hardsubx_debug:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v2.3.4
-      - name: cache
-        uses: actions/cache@v2
-        with:
-          path: |
-            src/rust/.cargo/registry
-            src/rust/.cargo/git
-            src/rust/target
-            windows/debug
-            C:/Program Files/LLVM
-          key: ${{ runner.os }}-cargoNew-${{ hashFiles('**/Cargo.lock') }}
-      # - name: Install llvm and clang
-      #   run: choco install llvm
-      - name: Set up Clang
+      - name: Check out repository
+        uses: actions/checkout@v2.3.4
+      - name: Setup MSBuild.exe
+        uses: microsoft/setup-msbuild@v1.0.2
+      - name: Install llvm and clang
         uses: egor-tensin/setup-clang@v1
         with:
           version: latest
@@ -213,29 +105,18 @@ jobs:
           toolchain: stable
           override: true
           target: i686-pc-windows-msvc
-      - name: Setup MSBuild.exe
-        uses: microsoft/setup-msbuild@v1.0.2
-      # - name: Install Windows 8.1 SDK
-      #   shell: powershell
-      #   run: |
-      #     Invoke-WebRequest -Method Get -Uri https://go.microsoft.com/fwlink/p/?LinkId=323507 -OutFile sdksetup.exe -UseBasicParsing
-      #     Start-Process -Wait sdksetup.exe -ArgumentList "/q", "/norestart", "/features", "OptionId.WindowsDesktopSoftwareDevelopmentKit", "OptionId.NetFxSoftwareDevelopmentKit"
-      - uses: ilammy/msvc-dev-cmd@v1
-      - name: pre rust build
-        env:
-          LIBCLANG_PATH: "C:\\Program Files\\LLVM\\lib"
-          LLVM_CONFIG_PATH: "C:\\Program Files\\LLVM\\bin\\llvm-config"
-          CARGO_TARGET_DIR: "..\\..\\windows"
-          BINDGEN_EXTRA_CLANG_ARGS: -fmsc-version=0
-        run: .\rust32.bat
-        working-directory: ./windows
+      - name: Install Win 10 SDK
+        uses: ilammy/msvc-dev-cmd@v1
       - name: build Debug
         run: msbuild ccextractor.sln /p:Configuration=Debug-Full /p:Platform=Win32
         working-directory: ./windows
       - name: Display version information
         run: ./ccextractorwinfull.exe --version
         working-directory: ./windows/Debug-Full
-      - name: ls
-        if: always()
-        run: dir
-        working-directory: ./windows
+      - uses: actions/upload-artifact@v2
+        with:
+          name: CCExtractor Windows OCR and HardSubX Debug build
+          path: |
+            ./windows/Debug-Full/ccextractorwinfull.exe
+            ./windows/Debug-Full/ccextractorwinfull.pdb
+            ./windows/Debug-Full/*.dll
