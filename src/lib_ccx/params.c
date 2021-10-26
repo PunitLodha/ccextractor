@@ -601,7 +601,6 @@ void print_usage(void)
 	mprint("                 -bom: Append a BOM (Byte Order Mark) to output files.\n");
 	mprint("                       Note that most text processing tools in linux will not\n");
 	mprint("                       like BOM.\n");
-	mprint("                       This is the default in Windows builds.\n");
 	mprint("                       -nobom: Do not append a BOM (Byte Order Mark) to output\n");
 	mprint("                       files. Note that this may break files when using\n");
 	mprint("                       Windows. This is the default in non-Windows builds.\n");
@@ -1028,6 +1027,11 @@ void version(char *location)
 	mprint("	Version: %s\n", VERSION);
 	mprint("	Git commit: %s\n", GIT_COMMIT);
 	mprint("	Compilation date: %s\n", COMPILE_DATE);
+#ifndef DISABLE_RUST
+	mprint("	CEA-708 decoder: Rust\n");
+#else
+	mprint("	CEA-708 decoder: C\n");
+#endif
 	mprint("	File SHA256: %s\n", hash);
 
 	mprint("Libraries used by CCExtractor\n");
