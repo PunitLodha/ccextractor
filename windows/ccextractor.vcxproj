@@ -599,8 +599,8 @@ xcopy /y "$(ProjectDir)libs\lib\ffmpeg-lib\swresample-2.dll" "$(ProjectDir)$(Out
 xcopy /y "$(ProjectDir)libs\lib\ffmpeg-lib\swscale-4.dll" "$(ProjectDir)$(OutDir)"</Command>
     </PostBuildEvent>
     <PreBuildEvent>
-      <Command>pre-build.bat</Command>
-      <Command>rustx86.bat</Command>
+      <Command>call pre-build.bat
+        call rustx86.bat</Command>
     </PreBuildEvent>
     <ProjectReference>
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
@@ -683,8 +683,8 @@ xcopy /y "$(ProjectDir)libs\lib\ffmpeg-lib\swscale-4.dll" "$(ProjectDir)$(OutDir
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
     </Link>
     <PreBuildEvent>
-      <Command>pre-build.bat</Command>
-      <Command>rust.bat</Command>
+      <Command>call pre-build.bat
+      call rust.bat </Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
