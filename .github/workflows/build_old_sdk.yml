@@ -15,6 +15,8 @@ jobs:
         with:
           toolchain: stable
           override: true
+      - name: Check rust version
+        run: rustc --version
       - name: Install Win 10 SDK
         uses: ilammy/msvc-dev-cmd@v1
       - name: build Release
