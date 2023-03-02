@@ -1,6 +1,7 @@
 name: Build CCExtractor on Windows
 
 on:
+  workflow_dispatch:
   push:
     paths:
       - ".github/workflows/build_windows.yml"
@@ -22,12 +23,12 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v3
       - name: Setup MSBuild.exe
-        uses: microsoft/setup-msbuild@v1.0.2
+        uses: microsoft/setup-msbuild@v1.3.1
       - name: Install llvm and clang
         run: choco install llvm
       - uses: actions-rs/toolchain@v1
         with:
-          toolchain: 1.56.0
+          toolchain: 1.57.0
           override: true
       - name: Install Win 10 SDK
         uses: ilammy/msvc-dev-cmd@v1
@@ -54,12 +55,12 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v3
       - name: Setup MSBuild.exe
-        uses: microsoft/setup-msbuild@v1.0.2
+        uses: microsoft/setup-msbuild@v1.3.1
       - name: Install llvm and clang
         run: choco install llvm
       - uses: actions-rs/toolchain@v1
         with:
-          toolchain: 1.56.0
+          toolchain: 1.57.0
           override: true
       - name: Install Win 10 SDK
         uses: ilammy/msvc-dev-cmd@v1
@@ -87,7 +88,7 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v3
       - name: Setup MSBuild.exe
-        uses: microsoft/setup-msbuild@v1.0.2
+        uses: microsoft/setup-msbuild@v1.3.1
       - name: Install llvm and clang
         uses: egor-tensin/setup-clang@v1
         with:
@@ -95,11 +96,17 @@ jobs:
           platform: x86
       - uses: actions-rs/toolchain@v1
         with:
-          toolchain: 1.56.0
+          toolchain: 1.57.0
           override: true
           target: i686-pc-windows-msvc
       - name: Install Win 10 SDK
         uses: ilammy/msvc-dev-cmd@v1
+      - name: Clone vcpkg
+        run: git clone --depth 1 --single-branch --recursive https://github.com/microsoft/vcpkg.git
+      - name: Setup vcpkg
+        run: cd vcpkg && bootstrap-vcpkg.bat && vcpkg integrate install
+      - name: Install dependencies
+        run: cd vcpkg && vcpkg install leptonica:x86-windows-static-md
       - name: build Release-Full
         env:
           LIBCLANG_PATH: "C:\\Program Files\\LLVM\\lib"
@@ -123,15 +130,21 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v3
       - name: Setup MSBuild.exe
-        uses: microsoft/setup-msbuild@v1.0.2
+        uses: microsoft/setup-msbuild@v1.3.1
       - name: Install llvm and clang
         uses: egor-tensin/setup-clang@v1
         with:
           version: latest
           platform: x86
+      - name: Clone vcpkg
+        run: git clone --depth 1 --single-branch --recursive https://github.com/microsoft/vcpkg.git
+      - name: Setup vcpkg
+        run: cd vcpkg && bootstrap-vcpkg.bat && vcpkg integrate install
+      - name: Install dependencies
+        run: cd vcpkg && vcpkg install leptonica:x86-windows-static-md
       - uses: actions-rs/toolchain@v1
         with:
-          toolchain: 1.56.0
+          toolchain: 1.57.0
           override: true
           target: i686-pc-windows-msvc
       - name: Install Win 10 SDK

@@ -22,6 +22,8 @@ num = "0.4"
 num-derive = "0.3"
 num-traits = "0.2"
 
+tesseract-sys = { version = "0.5.14", optional = true, default-features = false}
+leptonica-sys = { version = "0.4.3", optional = true, default-features = false}
 
 [build-dependencies]
 bindgen = "0.58.1"
