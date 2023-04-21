@@ -642,7 +642,7 @@
     </PostBuildEvent> -->
     <PreBuildEvent>
       <Command>call pre-build.bat
-        call rustx86.bat</Command>
+        call rustx86.bat release</Command>
     </PreBuildEvent>
     <ProjectReference>
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
@@ -673,7 +673,7 @@
     </Link>
     <PreBuildEvent>
       <Command>call pre-build.bat
-        call rustx86.bat</Command>
+        call rustx86.bat release</Command>
     </PreBuildEvent>
     <!-- <PostBuildEvent>
       <Command>xcopy /y "$(ProjectDir)libs\lib\liblept172.dll" "$(ProjectDir)$(OutDir)"
@@ -707,7 +707,7 @@
     </Link>
     <PreBuildEvent>
       <Command>call pre-build.bat
-        call rust.bat </Command>
+        call rust.bat release</Command>
     </PreBuildEvent>
     <!-- <PostBuildEvent>
       <Command>xcopy /y "$(VCPKG_ROOT)\installed\$(VCPKG_DEFAULT_TRIPLET)\lib\avcodec-59.dll"
@@ -746,7 +746,7 @@
     </Link>
     <PreBuildEvent>
       <Command>call pre-build.bat
-        call rust.bat </Command>
+        call rust.bat release</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
